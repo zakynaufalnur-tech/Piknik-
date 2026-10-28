@@ -1,0 +1,858 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piknik Yuk! - Jelajah Pacitan</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --green: #087f68;
+  --dark: #075647;
+  --yellow: #ffcf55;
+  --light: #eaf8f2;
+  --text: #193d35;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5faf7;
+  color: var(--text);
+}
+
+a { text-decoration: none; }
+
+button { font-family: inherit; cursor: pointer; }
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  background: white;
+  border-right: 1px solid #e3eee8;
+  padding: 28px 18px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 40px;
+}
+
+.logo-icon {
+  background: var(--yellow);
+  border-radius: 12px;
+  padding: 7px 12px;
+  font-size: 24px;
+}
+
+.menu-title {
+  font-size: 10px;
+  color: #8ba39a;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 20px 10px 12px;
+}
+
+.menu a {
+  display: block;
+  padding: 13px;
+  border-radius: 12px;
+  margin: 5px 0;
+  color: #71857b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: var(--light);
+  color: var(--green);
+}
+
+.side-card {
+  background: #fff6db;
+  padding: 17px;
+  border-radius: 15px;
+  margin-top: 45px;
+  font-size: 12px;
+}
+
+.side-card p {
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 7px;
+  color: #7e7b66;
+}
+
+/* MAIN */
+.content {
+  margin-left: 230px;
+  width: calc(100% - 230px);
+}
+
+.navbar {
+  height: 75px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-bottom: 1px solid #e3eee8;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #71857b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+.nav-button, .btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px 17px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+main {
+  padding: 28px 5%;
+}
+
+/* HERO */
+.hero {
+  min-height: 320px;
+  border-radius: 23px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  color: white;
+  background:
+    linear-gradient(90deg, #064f43ed, #087f6870),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=85')
+    center/cover;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #bde9d5;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1.2;
+  margin: 13px 0;
+}
+
+.hero h1 span { color: var(--yellow); }
+
+.hero p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #e4f5ee;
+  max-width: 400px;
+  margin-bottom: 22px;
+}
+
+.btn-yellow {
+  display: inline-block;
+  padding: 13px 18px;
+  border-radius: 10px;
+  background: var(--yellow);
+  color: var(--dark);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.hero-icon {
+  font-size: 90px;
+  padding: 20px;
+}
+
+/* INFO */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 22px 0 40px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid #e5eee8;
+  border-radius: 15px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon {
+  background: var(--light);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 21px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 12px;
+}
+
+.stat small {
+  display: block;
+  color: #81958b;
+  font-size: 9px;
+  margin-top: 4px;
+}
+
+/* DESTINASI */
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-heading h2,
+.plan h2 {
+  font-size: 25px;
+  margin-top: 7px;
+}
+
+.badge {
+  background: #fff0bf;
+  color: #92701b;
+  border-radius: 30px;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.destinations {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e3eee8;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px #07564712;
+}
+
+.card-img {
+  height: 175px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.buyutan {
+  background-image: url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=700&q=80');
+}
+
+.srau {
+  background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=80');
+}
+
+.maron {
+  background-image: url('https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?auto=format&fit=crop&w=700&q=80');
+}
+
+.img-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: white;
+  color: var(--green);
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.card-body { padding: 17px; }
+
+.card h3 { font-size: 15px; }
+
+.card p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #7c9087;
+  margin: 12px 0;
+}
+
+.location {
+  font-size: 10px;
+  color: #6c887b;
+  border-top: 1px solid #e8efeb;
+  padding-top: 12px;
+}
+
+.card .btn {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* CHECKLIST */
+.plan {
+  margin-top: 38px;
+  background: var(--light);
+  border-radius: 20px;
+  padding: 27px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: center;
+}
+
+.plan p {
+  font-size: 11px;
+  color: #718c80;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+.checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.checklist label {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.checklist input { accent-color: var(--green); }
+
+/* FOOTER */
+footer {
+  margin-top: 25px;
+  padding: 25px 5%;
+  background: white;
+  border-top: 1px solid #e3eee8;
+  text-align: center;
+  font-size: 10px;
+  color: #80948a;
+  line-height: 2;
+}
+
+/* MODAL */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: #062f29b8;
+  z-index: 20;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+}
+
+.modal-bg.show { display: flex; }
+
+.modal {
+  position: relative;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: var(--light);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 21px;
+}
+
+.modal h2 { margin: 12px 0; }
+
+.modal p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #71857b;
+  margin: 12px 0;
+}
+
+.tip {
+  background: #fff6db;
+  padding: 14px;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+.tip strong { font-size: 12px; }
+
+.modal .btn {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+/* HP */
+.mobile-menu { display: none; }
+
+@media (max-width: 950px) {
+  .sidebar { width: 190px; }
+  .content {
+    margin-left: 190px;
+    width: calc(100% - 190px);
+  }
+  .destinations { grid-template-columns: 1fr 1fr; }
+  .card:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 650px) {
+  .sidebar {
+    display: none;
+    width: 250px;
+    box-shadow: 10px 0 30px #0002;
+  }
+
+  .sidebar.open { display: block; }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .navbar { padding: 0 16px; height: 68px; }
+  .nav-links, .nav-button { display: none; }
+  .mobile-menu {
+    display: block;
+    background: var(--light);
+    color: var(--green);
+    border: none;
+    border-radius: 9px;
+    padding: 10px 13px;
+    font-size: 18px;
+  }
+
+  main { padding: 17px 14px 30px; }
+
+  .hero {
+    padding: 27px 22px;
+    min-height: 300px;
+  }
+
+  .hero h1 { font-size: 38px; }
+  .hero-icon { font-size: 42px; padding: 0; }
+  .hero p { font-size: 11px; }
+
+  .stats { grid-template-columns: 1fr; gap: 9px; }
+  .stat { padding: 12px; }
+
+  .section-heading h2, .plan h2 { font-size: 22px; }
+  .destinations { grid-template-columns: 1fr; }
+  .card:last-child { grid-column: auto; }
+  .card-img { height: 200px; }
+
+  .plan {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <span class="logo-icon">☀</span>
+      <span>Piknik Yuk!</span>
+    </div>
+
+    <div class="menu-title">MENU UTAMA</div>
+
+    <nav class="menu">
+      <a class="active" href="#home">⌂ &nbsp; Beranda</a>
+      <a href="#destinasi">🏝️ &nbsp; Destinasi Wisata</a>
+      <a href="#rencana">🎒 &nbsp; Rencana Piknik</a>
+    </nav>
+
+    <div class="side-card">
+      <div style="font-size:25px">🌞</div>
+      <strong>Weekend Mood</strong>
+      <p>Udara segar, pemandangan indah, dan cerita baru. Yuk, jelajahi Pacitan!</p>
+    </div>
+  </aside>
+
+  <!-- KONTEN UTAMA -->
+  <div class="content">
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+      <div class="logo" style="margin:0;font-size:17px">
+        <span class="logo-icon">☀</span>
+        <span>Piknik Yuk!</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#home">Beranda</a>
+        <a href="#destinasi">Destinasi</a>
+        <a href="#rencana">Rencana Piknik</a>
+      </nav>
+
+      <a class="nav-button" href="#destinasi">Jelajahi ↗</a>
+
+      <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+    </header>
+
+    <main>
+
+      <!-- HOME -->
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow">JELAJAH PACITAN • JAWA TIMUR</div>
+          <h1>Waktunya<br><span>Piknik!</span></h1>
+          <p>
+            Temukan pantai cantik, air jernih, dan suasana alam
+            yang bikin pikiran segar kembali.
+          </p>
+          <a class="btn-yellow" href="#destinasi">Jelajahi Destinasi ↗</a>
+        </div>
+
+        <div class="hero-icon">🌴</div>
+      </section>
+
+      <!-- INFORMASI -->
+      <section class="stats">
+        <div class="stat">
+          <span class="stat-icon">🏝️</span>
+          <div>
+            <strong>3 Destinasi</strong>
+            <small>Pilihan wisata alam</small>
+          </div>
+        </div>
+
+        <div class="stat">
+          <span class="stat-icon">📍</span>
+          <div>
+            <strong>Pacitan, Jawa Timur</strong>
+            <small>Wisata alam Indonesia</small>
+          </div>
+        </div>
+
+        <div class="stat">
+          <span class="stat-icon">🎒</span>
+          <div>
+            <strong>Siap Piknik?</strong>
+            <small>Siapkan liburanmu</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- DESTINASI -->
+      <section id="destinasi">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">PILIH TEMPAT FAVORITMU</div>
+            <h2>Destinasi Pilihan</h2>
+          </div>
+          <span class="badge">3 Tempat Seru</span>
+        </div>
+
+        <div class="destinations">
+
+          <!-- PANTAI BUYUTAN -->
+          <article class="card">
+            <div class="card-img buyutan">
+              <span class="img-label">🏖️ Pantai</span>
+            </div>
+
+            <div class="card-body">
+              <h3>Pantai Buyutan</h3>
+              <p>
+                Pantai dengan pasir putih, laut biru, dan pemandangan
+                batu karang yang unik.
+              </p>
+              <div class="location">📍 Donorojo, Pacitan</div>
+              <button class="btn" onclick="showDetail('buyutan')">
+                Lihat Detail →
+              </button>
+            </div>
+          </article>
+
+          <!-- PANTAI SRAU -->
+          <article class="card">
+            <div class="card-img srau">
+              <span class="img-label">🌅 Pantai</span>
+            </div>
+
+            <div class="card-body">
+              <h3>Pantai Srau</h3>
+              <p>
+                Nikmati pemandangan laut lepas, pasir cerah, dan
+                suasana santai bersama keluarga.
+              </p>
+              <div class="location">📍 Pringkuku, Pacitan</div>
+              <button class="btn" onclick="showDetail('srau')">
+                Lihat Detail →
+              </button>
+            </div>
+          </article>
+
+          <!-- SUNGAI MARON -->
+          <article class="card">
+            <div class="card-img maron">
+              <span class="img-label">🛶 Sungai</span>
+            </div>
+
+            <div class="card-body">
+              <h3>Sungai Maron</h3>
+              <p>
+                Susuri sungai dengan air kehijauan dan pepohonan
+                rindang di sepanjang tepinya.
+              </p>
+              <div class="location">📍 Dersono, Pacitan</div>
+              <button class="btn" onclick="showDetail('maron')">
+                Lihat Detail →
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- RENCANA PIKNIK -->
+      <section class="plan" id="rencana">
+        <div>
+          <div class="eyebrow">BIAR NGGAK LUPA</div>
+          <h2>Siapkan Piknikmu 🎒</h2>
+          <p>
+            Centang perlengkapan yang sudah disiapkan agar
+            perjalananmu lebih nyaman.
+          </p>
+        </div>
+
+        <div class="checklist">
+          <label>
+            <input type="checkbox">
+            Air minum dan bekal
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Topi dan sunscreen
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Uang tunai secukupnya
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Kantong sampah pribadi
+          </label>
+
+          <label>
+            <input type="checkbox">
+            Baju ganti dan perlengkapan pribadi
+          </label>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <strong>Piknik Yuk! ☀</strong>
+      <p>Jelajahi keindahan Pacitan dan jaga kebersihan alam.</p>
+      <p>© 2026 Piknik Yuk! — Proyek Web Wisata</p>
+    </footer>
+
+  </div>
+</div>
+
+<!-- MODAL DETAIL -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <button class="close" onclick="closeDetail()">×</button>
+
+    <div style="font-size:45px;margin:10px 0" id="detail-icon">🏖️</div>
+
+    <div class="eyebrow">INFORMASI DESTINASI</div>
+    <h2 id="detail-title">Nama Destinasi</h2>
+    <p id="detail-description"></p>
+
+    <div class="tip">
+      <strong>💡 Tips Piknik</strong>
+      <p id="detail-tip"></p>
+    </div>
+
+    <a class="btn" id="map-link"
+       href="https://www.google.com/maps"
+       target="_blank" rel="noopener">
+      Cari Lokasi di Google Maps ↗
+    </a>
+  </div>
+</div>
+
+<script>
+// DATA DESTINASI WISATA
+const places = {
+  buyutan: {
+    title: "Pantai Buyutan",
+    icon: "🏖️",
+    description:
+      "Pantai Buyutan berada di kawasan Donorojo, Pacitan. " +
+      "Tempat ini dikenal dengan pasir cerah, laut biru, " +
+      "dan batu karang yang menarik untuk dinikmati.",
+    tip:
+      "Periksa cuaca sebelum berangkat. Hindari berenang " +
+      "saat ombak besar dan jangan meninggalkan sampah.",
+    map: "Pantai Buyutan Pacitan"
+  },
+
+  srau: {
+    title: "Pantai Srau",
+    icon: "🌅",
+    description:
+      "Pantai Srau di Kecamatan Pringkuku, Pacitan, " +
+      "menawarkan pemandangan laut lepas dan suasana " +
+      "pesisir yang cocok untuk bersantai.",
+    tip:
+      "Gunakan alas kaki yang nyaman dan jangan terlalu " +
+      "dekat dengan ombak besar.",
+    map: "Pantai Srau Pacitan"
+  },
+
+  maron: {
+    title: "Sungai Maron",
+    icon: "🛶",
+    description:
+      "Sungai Maron merupakan wisata susur sungai di Pacitan " +
+      "yang memiliki air kehijauan dan pepohonan rindang. " +
+      "Nikmati pemandangan dengan mengikuti aturan pengelola.",
+    tip:
+      "Gunakan pelampung saat naik perahu, ikuti arahan " +
+      "petugas, dan jangan membuang sampah ke sungai.",
+    map: "Sungai Maron Pacitan"
+  }
+};
+
+// MEMBUKA DETAIL DESTINASI
+function showDetail(placeName) {
+  const place = places[placeName];
+
+  if (!place) return;
+
+  document.getElementById("detail-icon").textContent =
+    place.icon;
+
+  document.getElementById("detail-title").textContent =
+    place.title;
+
+  document.getElementById("detail-description").textContent =
+    place.description;
+
+  document.getElementById("detail-tip").textContent =
+    place.tip;
+
+  document.getElementById("map-link").href =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(place.map);
+
+  document.getElementById("modal").classList.add("show");
+}
+
+// MENUTUP DETAIL
+function closeDetail() {
+  document.getElementById("modal").classList.remove("show");
+}
+
+// MENUTUP MODAL SAAT BAGIAN LUAR DIKLIK
+document.getElementById("modal").addEventListener(
+  "click",
+  function(event) {
+    if (event.target === this) {
+      closeDetail();
+    }
+  }
+);
+
+// MENU SIDEBAR DI HP
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+// TUTUP MODAL DENGAN TOMBOL ESC
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    closeDetail();
+  }
+});
+</script>
+
+</body>
+</html>
